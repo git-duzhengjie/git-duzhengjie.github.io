@@ -1,98 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="杜政颉的博客">
+    <meta name="keyword"  content="爱车保">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-  
-  <title>高性能分布式数据缓存系统研究 | 杜政颉的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;随着公司的发展，用户的规模必然越来越大，数据量也会呈指数级增加，特别是用户车辆定位数据，更是一个考验到公司后续产品发展的难题。目前，用户定位数据已经达到每天上千万条的数据量。因此，从庞大的数据池中提取数据并反馈给客户端必将成为一项挑战。同时，用户的并发访问也会考验到数据库，因为我们知道，硬盘的存取效率远远低">
-<meta name="keywords" content="技术">
-<meta property="og:type" content="article">
-<meta property="og:title" content="高性能分布式数据缓存系统研究">
-<meta property="og:url" content="https://git-duzhengjie.github.io/2018/06/11/高性能分布式数据缓存系统研究/index.html">
-<meta property="og:site_name" content="杜政颉的博客">
-<meta property="og:description" content="一、前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;随着公司的发展，用户的规模必然越来越大，数据量也会呈指数级增加，特别是用户车辆定位数据，更是一个考验到公司后续产品发展的难题。目前，用户定位数据已经达到每天上千万条的数据量。因此，从庞大的数据池中提取数据并反馈给客户端必将成为一项挑战。同时，用户的并发访问也会考验到数据库，因为我们知道，硬盘的存取效率远远低">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="https://git-duzhengjie.github.io/images/318497-20160103141339432-1681082715.jpg">
-<meta property="og:updated_time" content="2018-06-11T08:02:24.941Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="高性能分布式数据缓存系统研究">
-<meta name="twitter:description" content="一、前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;随着公司的发展，用户的规模必然越来越大，数据量也会呈指数级增加，特别是用户车辆定位数据，更是一个考验到公司后续产品发展的难题。目前，用户定位数据已经达到每天上千万条的数据量。因此，从庞大的数据池中提取数据并反馈给客户端必将成为一项挑战。同时，用户的并发访问也会考验到数据库，因为我们知道，硬盘的存取效率远远低">
-<meta name="twitter:image" content="https://git-duzhengjie.github.io/images/318497-20160103141339432-1681082715.jpg">
-  
-    <link rel="alternate" href="/atom.xml" title="杜政颉的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+    <title>
+        
+        高性能分布式数据缓存系统研究 - 杜政颉的博客 | AirCloud&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">杜政颉的博客</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">天行健，君子以自强不息；地势坤，君子以厚德载物</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://git-duzhengjie.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-高性能分布式数据缓存系统研究" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/11/高性能分布式数据缓存系统研究/" class="article-date">
-  <time datetime="2018-06-11T07:31:19.447Z" itemprop="datePublished">2018-06-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      高性能分布式数据缓存系统研究
-    </h1>
-  
 
-      </header>
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 天行健，君子以自强不息；地势坤，君子以厚德载物 </i>
+</div>
+
+<div class="index-container">
     
-    <div class="article-entry" itemprop="articleBody">
-      
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/images/home-bg.jpg" />
+        </div>
+        <div class="name">
+            <i>杜政颉</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、前言"><span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、数据库的瓶颈"><span class="toc-text">二、数据库的瓶颈</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-2-1数据量"><span class="toc-text">  2.1数据量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-2-2TPS"><span class="toc-text">  2.2TPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-2-3响应时间"><span class="toc-text">  2.3响应时间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、缓存系统选型"><span class="toc-text">三、缓存系统选型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-3-1缓存的类型"><span class="toc-text">  3.1缓存的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-1-1本地缓存"><span class="toc-text">    3.1.1本地缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-1-2分布式缓存"><span class="toc-text">    3.1.2分布式缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-1-3数据库缓存"><span class="toc-text">    3.1.3数据库缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-3-2选型指标"><span class="toc-text">  3.2选型指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-2-1容量"><span class="toc-text">    3.2.1容量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-2-2并发量"><span class="toc-text">    3.2.2并发量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-2-3响应时间"><span class="toc-text">    3.2.3响应时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-2-4使用成本"><span class="toc-text">    3.2.4使用成本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-2-5扩展空间"><span class="toc-text">    3.2.5扩展空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-2-6容灾"><span class="toc-text">    3.2.6容灾</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-3-3常见分布式缓存系统对比"><span class="toc-text">  3.3常见分布式缓存系统对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-3-1Memcached"><span class="toc-text">    3.3.1Memcached</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-3-2Redis"><span class="toc-text">    3.3.2Redis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-3-3淘宝Tair"><span class="toc-text">    3.3.3淘宝Tair</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-3-4Kafka"><span class="toc-text">    3.3.4Kafka</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-3-4缓存的设计与策略"><span class="toc-text">  3.4缓存的设计与策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-4-1缓存对象设计"><span class="toc-text">    3.4.1缓存对象设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-3-4-1-1缓存对象粒度"><span class="toc-text">      3.4.1.1缓存对象粒度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-3-4-1-2-缓存对象结构"><span class="toc-text">      3.4.1.2 缓存对象结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-4-2-缓存更新策略"><span class="toc-text">    3.4.2 缓存更新策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-3-4-2-1-被动失效"><span class="toc-text">      3.4.2.1 被动失效</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-3-4-2-2-主动更新"><span class="toc-text">      3.4.2.2 主动更新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nbsp-nbsp-nbsp-nbsp-3-4-3-数据对象序列化"><span class="toc-text">    3.4.3 数据对象序列化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、总结"><span class="toc-text">四、总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 天行健，君子以自强不息；地势坤，君子以厚德载物 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        高性能分布式数据缓存系统研究
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-06-11 16:53:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#分布式" title="分布式">分布式</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#缓存" title="缓存">缓存</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
         <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;随着公司的发展，用户的规模必然越来越大，数据量也会呈指数级增加，特别是用户车辆定位数据，更是一个考验到公司后续产品发展的难题。目前，用户定位数据已经达到每天上千万条的数据量。因此，从庞大的数据池中提取数据并反馈给客户端必将成为一项挑战。同时，用户的并发访问也会考验到数据库，因为我们知道，硬盘的存取效率远远低于内存，数据库除了做了缓存以外的部分数据，大部分还是从硬盘获取，IO瓶颈制约着对用户的实时并发响应。为了解决上述问题，设计一套高并发、高吞吐量的数据缓存系统成为一件迫切的事。基于此，我们需要研究分析分布式数据缓存系统的现状，在此基础上，再设计一套符合公司定位的分布式数据缓存系统。</p>
 <h1 id="二、数据库的瓶颈"><a href="#二、数据库的瓶颈" class="headerlink" title="二、数据库的瓶颈"></a>二、数据库的瓶颈</h1><h2 id="nbsp-nbsp-2-1数据量"><a href="#nbsp-nbsp-2-1数据量" class="headerlink" title="&nbsp;&nbsp;2.1数据量"></a>&nbsp;&nbsp;2.1数据量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关系型数据库的数据量是比较小的，以我们常用的MySQL为例，单表数据条数一般应该控制在2000w以内，如果业务很复杂的话，可能还要低一些。即便是对于Oracle这些大型商业数据库来讲，其能存储的数据量也很难满足一个拥有几千万甚至数亿用户的大型互联网系统。</p>
 <h2 id="nbsp-nbsp-2-2TPS"><a href="#nbsp-nbsp-2-2TPS" class="headerlink" title="&nbsp;&nbsp;2.2TPS"></a>&nbsp;&nbsp;2.2TPS</h2><p>在实际开发中我们经常会发现，关系型数据库在TPS上的瓶颈往往会比其他瓶颈更容易暴露出来，尤其对于大型web系统，由于每天大量的并发访问，对数据库的读写性能要求非常高；而传统的关系型数据库的处理能力确实捉襟见肘；以我们常用的MySQL数据库为例，常规情况下的TPS大概只有1500左右（各种极端场景下另当别论）；下图是MySQL官方所给出的一份测试数据：</p>
@@ -169,115 +216,75 @@
 <li><a href="https://engineering.linkedin.com/kafka/benchmarking-apache-kafka-2-million-writes-second-three-cheap-machines" target="_blank" rel="noopener">https://engineering.linkedin.com/kafka/benchmarking-apache-kafka-2-million-writes-second-three-cheap-machines</a></li>
 </ol>
 
-      
+        
+        <div id="comment-container">
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://git-duzhengjie.github.io/2018/06/11/高性能分布式数据缓存系统研究/" data-id="cji9yzelc0001sou26ve5vexz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2018/06/11/数据序列化框架对比分析/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">数据序列化框架对比分析</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+</div>
     </div>
-  </div>
+</div>
 
 
-  
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/git-duzhengjie">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/06/11/高性能分布式数据缓存系统研究/">高性能分布式数据缓存系统研究</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/11/数据序列化框架对比分析/">数据序列化框架对比分析</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/11/kubernetes自动扩容功能剖析/">kubernetes自动扩容功能剖析</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/11/Kafka高性能吞吐揭秘/">Kafka高性能吞吐揭秘</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/11/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 杜政颉<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
 
 
 
-  </div>
+
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: '高性能分布式数据缓存系统研究',
+        owner: 'aircloud',
+        repo: '',
+        oauth: {
+            client_id: 'your-id-created-by-https://github.com/settings/applications/new',
+            client_secret: 'your-secret-created-by-https://github.com/settings/applications/new',
+        },
+    })
+    gitment.render('comment-container')
+</script>
+
 </html>
