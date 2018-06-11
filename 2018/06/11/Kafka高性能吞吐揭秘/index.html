@@ -15,16 +15,16 @@
 <meta property="og:site_name" content="杜政颉的博客">
 <meta property="og:description" content="概览&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;kafka是一套分布式高性能消息缓冲集群系统，其中涉及到的名词如下所示   Topic：用于划分Message的逻辑概念，一个Topic可以分布在多个Broker上 Partition：是Kafka中横向扩展和一切并行化的基础，每个Topic都至少被切分为1个Partition Offset：消息在Partit">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/git-duzhengjie/documents/blob/master/image/1021389888-56442ffade963.jpg">
-<meta property="og:image" content="https://github.com/git-duzhengjie/documents/blob/master/image/4284736387-56443027674a2.jpg">
-<meta property="og:image" content="https://github.com/git-duzhengjie/documents/blob/master/image/1593922197-5644305578f81.jpg">
-<meta property="og:image" content="https://github.com/git-duzhengjie/documents/blob/master/image/1537103758-564430720edc9.jpg">
-<meta property="og:image" content="https://github.com/git-duzhengjie/documents/blob/master/image/1836079238-56443081660f3.jpg">
-<meta property="og:updated_time" content="2018-06-11T07:35:27.168Z">
+<meta property="og:image" content="https://git-duzhengjie.github.io/images/1021389888-56442ffade963.jpg">
+<meta property="og:image" content="https://git-duzhengjie.github.io/images/4284736387-56443027674a2.jpg">
+<meta property="og:image" content="https://git-duzhengjie.github.io/images/1593922197-5644305578f81.jpg">
+<meta property="og:image" content="https://git-duzhengjie.github.io/images/1537103758-564430720edc9.jpg">
+<meta property="og:image" content="https://git-duzhengjie.github.io/images/1836079238-56443081660f3.jpg">
+<meta property="og:updated_time" content="2018-06-11T08:01:55.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka高性能吞吐揭秘">
 <meta name="twitter:description" content="概览&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;kafka是一套分布式高性能消息缓冲集群系统，其中涉及到的名词如下所示   Topic：用于划分Message的逻辑概念，一个Topic可以分布在多个Broker上 Partition：是Kafka中横向扩展和一切并行化的基础，每个Topic都至少被切分为1个Partition Offset：消息在Partit">
-<meta name="twitter:image" content="https://github.com/git-duzhengjie/documents/blob/master/image/1021389888-56442ffade963.jpg">
+<meta name="twitter:image" content="https://git-duzhengjie.github.io/images/1021389888-56442ffade963.jpg">
   
     <link rel="alternate" href="/atom.xml" title="杜政颉的博客" type="application/atom+xml">
   
@@ -124,11 +124,11 @@
 <li>OS 再把数据从Buffer中Copy到网卡的Buffer上，这样完成一次发送</li>
 </ol>
 </blockquote>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1021389888-56442ffade963.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个过程共经历两次Context Switch，四次System Call。同一份数据在内核Buffer与用户Buffer之间重复拷贝，效率低下。其中2、3两步没有必要，完全可以直接在内核区完成数据拷贝。这也正是Sendfile所解决的问题，经过Sendfile优化后，整个I/O过程就变成了下面这个样子。 </p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/4284736387-56443027674a2.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过以上的介绍不难看出，Kafka的设计初衷是尽一切努力在内存中完成数据交换，无论是对外作为一整个消息系统，或是内部同底层操作系统的交互。如果Producer和Consumer之间生产和消费进度上配合得当，完全可以实现数据交换零I/O。这也就是我为什么说Kafka使用“硬盘”并没有带来过多性能损失的原因。下面是在生产环境中采到的一些指标。<br>(20 Brokers, 75 Partitions per Broker, 110k msg/s) </p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1593922197-5644305578f81.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此时的集群只有写，没有读操作。10M/s左右的Send的流量是Partition之间进行Replicate而产生的。从recv和writ的速率比较可以看出，写盘是使用Asynchronous+Batch的方式，底层OS可能还会进行磁盘写顺序优化。而在有Read Request进来的时候分为两种情况，第一种是内存中完成数据交换。</p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1537103758-564430720edc9.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send流量从平均10M/s增加到了到平均60M/s，而磁盘Read只有不超过50KB/s。PageCache降低磁盘I/O效果非常明显。接下来是读一些收到了一段时间，已经从内存中被换出刷写到磁盘上的老数据。 </p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1836079238-56443081660f3.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他指标还是老样子，而磁盘Read已经飚高到40+MB/s。此时全部的数据都已经是走硬盘了(对硬盘的顺序读取OS层会进行Prefill PageCache的优化)。依然没有任何性能问题。<br><strong>Tips</strong>：</p>
+<p><img src="/images/1021389888-56442ffade963.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个过程共经历两次Context Switch，四次System Call。同一份数据在内核Buffer与用户Buffer之间重复拷贝，效率低下。其中2、3两步没有必要，完全可以直接在内核区完成数据拷贝。这也正是Sendfile所解决的问题，经过Sendfile优化后，整个I/O过程就变成了下面这个样子。 </p>
+<p><img src="/images/4284736387-56443027674a2.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过以上的介绍不难看出，Kafka的设计初衷是尽一切努力在内存中完成数据交换，无论是对外作为一整个消息系统，或是内部同底层操作系统的交互。如果Producer和Consumer之间生产和消费进度上配合得当，完全可以实现数据交换零I/O。这也就是我为什么说Kafka使用“硬盘”并没有带来过多性能损失的原因。下面是在生产环境中采到的一些指标。<br>(20 Brokers, 75 Partitions per Broker, 110k msg/s) </p>
+<p><img src="/images/1593922197-5644305578f81.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此时的集群只有写，没有读操作。10M/s左右的Send的流量是Partition之间进行Replicate而产生的。从recv和writ的速率比较可以看出，写盘是使用Asynchronous+Batch的方式，底层OS可能还会进行磁盘写顺序优化。而在有Read Request进来的时候分为两种情况，第一种是内存中完成数据交换。</p>
+<p><img src="/images/1537103758-564430720edc9.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send流量从平均10M/s增加到了到平均60M/s，而磁盘Read只有不超过50KB/s。PageCache降低磁盘I/O效果非常明显。接下来是读一些收到了一段时间，已经从内存中被换出刷写到磁盘上的老数据。 </p>
+<p><img src="/images/1836079238-56443081660f3.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他指标还是老样子，而磁盘Read已经飚高到40+MB/s。此时全部的数据都已经是走硬盘了(对硬盘的顺序读取OS层会进行Prefill PageCache的优化)。依然没有任何性能问题。<br><strong>Tips</strong>：</p>
 <blockquote>
 <ol>
 <li>Kafka官方并不建议通过Broker端的log.flush.interval.messages和log.flush.interval.ms来强制写盘，认为数据的可靠性应该通过Replica来保证，而强制Flush数据到磁盘会对整体性能产生影响</li>
@@ -170,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://git-duzhengjie.github.io/2018/06/11/Kafka高性能吞吐揭秘/" data-id="cji9xvr7t0002oku2admqqmyx" class="article-share-link">Share</a>
+      <a data-url="https://git-duzhengjie.github.io/2018/06/11/Kafka高性能吞吐揭秘/" data-id="cji9yzel80000sou29tvfbbd1" class="article-share-link">Share</a>
       
       
     </footer>

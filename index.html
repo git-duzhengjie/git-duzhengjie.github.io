@@ -95,7 +95,7 @@
         <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;随着公司的发展，用户的规模必然越来越大，数据量也会呈指数级增加，特别是用户车辆定位数据，更是一个考验到公司后续产品发展的难题。目前，用户定位数据已经达到每天上千万条的数据量。因此，从庞大的数据池中提取数据并反馈给客户端必将成为一项挑战。同时，用户的并发访问也会考验到数据库，因为我们知道，硬盘的存取效率远远低于内存，数据库除了做了缓存以外的部分数据，大部分还是从硬盘获取，IO瓶颈制约着对用户的实时并发响应。为了解决上述问题，设计一套高并发、高吞吐量的数据缓存系统成为一件迫切的事。基于此，我们需要研究分析分布式数据缓存系统的现状，在此基础上，再设计一套符合公司定位的分布式数据缓存系统。</p>
 <h1 id="二、数据库的瓶颈"><a href="#二、数据库的瓶颈" class="headerlink" title="二、数据库的瓶颈"></a>二、数据库的瓶颈</h1><h2 id="nbsp-nbsp-2-1数据量"><a href="#nbsp-nbsp-2-1数据量" class="headerlink" title="&nbsp;&nbsp;2.1数据量"></a>&nbsp;&nbsp;2.1数据量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关系型数据库的数据量是比较小的，以我们常用的MySQL为例，单表数据条数一般应该控制在2000w以内，如果业务很复杂的话，可能还要低一些。即便是对于Oracle这些大型商业数据库来讲，其能存储的数据量也很难满足一个拥有几千万甚至数亿用户的大型互联网系统。</p>
 <h2 id="nbsp-nbsp-2-2TPS"><a href="#nbsp-nbsp-2-2TPS" class="headerlink" title="&nbsp;&nbsp;2.2TPS"></a>&nbsp;&nbsp;2.2TPS</h2><p>在实际开发中我们经常会发现，关系型数据库在TPS上的瓶颈往往会比其他瓶颈更容易暴露出来，尤其对于大型web系统，由于每天大量的并发访问，对数据库的读写性能要求非常高；而传统的关系型数据库的处理能力确实捉襟见肘；以我们常用的MySQL数据库为例，常规情况下的TPS大概只有1500左右（各种极端场景下另当别论）；下图是MySQL官方所给出的一份测试数据：</p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/318497-20160103141339432-1681082715.jpg" alt="图片描述"></p>
+<p><img src="/images/318497-20160103141339432-1681082715.jpg" alt=""></p>
 <p>而对于一个日均PV千万的大型网站来讲，每个PV所产生的数据库读写量可能要超出几倍，这种情况下，每天所有的数据读写请求量可能远超出关系型数据的处理能力，更别说在流量峰值的情况下了；所以我们必须要有高效的缓存手段来抵挡住大部分的数据请求！</p>
 <h2 id="nbsp-nbsp-2-3响应时间"><a href="#nbsp-nbsp-2-3响应时间" class="headerlink" title="&nbsp;&nbsp;2.3响应时间"></a>&nbsp;&nbsp;2.3响应时间</h2><p>正常情况下，关系型数据的响应时间是相当不错的，一般在10ms以内甚至更短，尤其是在配置得当的情况下。但是就如前面所言，我们的需求是不一般的：当拥有几亿条数据，1wTPS的时候，响应时间也要在10ms以内，这几乎是任何一款关系型数据都无法做到的。<br>那么这个问题如何解决呢？最简单有效的办法当然是缓存！</p>
 <h1 id="三、缓存系统选型"><a href="#三、缓存系统选型" class="headerlink" title="三、缓存系统选型"></a>三、缓存系统选型</h1><h2 id="nbsp-nbsp-3-1缓存的类型"><a href="#nbsp-nbsp-3-1缓存的类型" class="headerlink" title="&nbsp;&nbsp;3.1缓存的类型"></a>&nbsp;&nbsp;3.1缓存的类型</h2><h3 id="nbsp-nbsp-nbsp-nbsp-3-1-1本地缓存"><a href="#nbsp-nbsp-nbsp-nbsp-3-1-1本地缓存" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;3.1.1本地缓存"></a>&nbsp;&nbsp;&nbsp;&nbsp;3.1.1本地缓存</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地缓存可能是大家用的最多的一种缓存方式了，不管是本地内存还是磁盘，其速度快，成本低，在有些场合非常有效；但是对于web系统的集群负载均衡结构来说，本地缓存使用起来就比较受限制，因为当数据库数据发生变化时，你没有一个简单有效的方法去更新本地缓存；然而，你如果在不同的服务器之间去同步本地缓存信息，由于缓存的低时效性和高访问量的影响，其成本和性能恐怕都是难以接受的。</p>
@@ -171,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://git-duzhengjie.github.io/2018/06/11/高性能分布式数据缓存系统研究/" data-id="cji9xvr860005oku21sd8f3sy" class="article-share-link">Share</a>
+      <a data-url="https://git-duzhengjie.github.io/2018/06/11/高性能分布式数据缓存系统研究/" data-id="cji9yzelc0001sou26ve5vexz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://git-duzhengjie.github.io/2018/06/11/数据序列化框架对比分析/" data-id="cji9xvr7v0004oku27qmfw931" class="article-share-link">Share</a>
+      <a data-url="https://git-duzhengjie.github.io/2018/06/11/数据序列化框架对比分析/" data-id="cji9yzelh0004sou2safmiw1j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://git-duzhengjie.github.io/2018/06/11/kubernetes自动扩容功能剖析/" data-id="cji9xvr7u0003oku2c8khdwfr" class="article-share-link">Share</a>
+      <a data-url="https://git-duzhengjie.github.io/2018/06/11/kubernetes自动扩容功能剖析/" data-id="cji9yzelg0003sou21ufy0xt7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -353,11 +353,11 @@
 <li>OS 再把数据从Buffer中Copy到网卡的Buffer上，这样完成一次发送</li>
 </ol>
 </blockquote>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1021389888-56442ffade963.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个过程共经历两次Context Switch，四次System Call。同一份数据在内核Buffer与用户Buffer之间重复拷贝，效率低下。其中2、3两步没有必要，完全可以直接在内核区完成数据拷贝。这也正是Sendfile所解决的问题，经过Sendfile优化后，整个I/O过程就变成了下面这个样子。 </p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/4284736387-56443027674a2.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过以上的介绍不难看出，Kafka的设计初衷是尽一切努力在内存中完成数据交换，无论是对外作为一整个消息系统，或是内部同底层操作系统的交互。如果Producer和Consumer之间生产和消费进度上配合得当，完全可以实现数据交换零I/O。这也就是我为什么说Kafka使用“硬盘”并没有带来过多性能损失的原因。下面是在生产环境中采到的一些指标。<br>(20 Brokers, 75 Partitions per Broker, 110k msg/s) </p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1593922197-5644305578f81.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此时的集群只有写，没有读操作。10M/s左右的Send的流量是Partition之间进行Replicate而产生的。从recv和writ的速率比较可以看出，写盘是使用Asynchronous+Batch的方式，底层OS可能还会进行磁盘写顺序优化。而在有Read Request进来的时候分为两种情况，第一种是内存中完成数据交换。</p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1537103758-564430720edc9.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send流量从平均10M/s增加到了到平均60M/s，而磁盘Read只有不超过50KB/s。PageCache降低磁盘I/O效果非常明显。接下来是读一些收到了一段时间，已经从内存中被换出刷写到磁盘上的老数据。 </p>
-<p><img src="https://github.com/git-duzhengjie/documents/blob/master/image/1836079238-56443081660f3.jpg" alt="图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他指标还是老样子，而磁盘Read已经飚高到40+MB/s。此时全部的数据都已经是走硬盘了(对硬盘的顺序读取OS层会进行Prefill PageCache的优化)。依然没有任何性能问题。<br><strong>Tips</strong>：</p>
+<p><img src="/images/1021389888-56442ffade963.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个过程共经历两次Context Switch，四次System Call。同一份数据在内核Buffer与用户Buffer之间重复拷贝，效率低下。其中2、3两步没有必要，完全可以直接在内核区完成数据拷贝。这也正是Sendfile所解决的问题，经过Sendfile优化后，整个I/O过程就变成了下面这个样子。 </p>
+<p><img src="/images/4284736387-56443027674a2.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过以上的介绍不难看出，Kafka的设计初衷是尽一切努力在内存中完成数据交换，无论是对外作为一整个消息系统，或是内部同底层操作系统的交互。如果Producer和Consumer之间生产和消费进度上配合得当，完全可以实现数据交换零I/O。这也就是我为什么说Kafka使用“硬盘”并没有带来过多性能损失的原因。下面是在生产环境中采到的一些指标。<br>(20 Brokers, 75 Partitions per Broker, 110k msg/s) </p>
+<p><img src="/images/1593922197-5644305578f81.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此时的集群只有写，没有读操作。10M/s左右的Send的流量是Partition之间进行Replicate而产生的。从recv和writ的速率比较可以看出，写盘是使用Asynchronous+Batch的方式，底层OS可能还会进行磁盘写顺序优化。而在有Read Request进来的时候分为两种情况，第一种是内存中完成数据交换。</p>
+<p><img src="/images/1537103758-564430720edc9.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send流量从平均10M/s增加到了到平均60M/s，而磁盘Read只有不超过50KB/s。PageCache降低磁盘I/O效果非常明显。接下来是读一些收到了一段时间，已经从内存中被换出刷写到磁盘上的老数据。 </p>
+<p><img src="/images/1836079238-56443081660f3.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他指标还是老样子，而磁盘Read已经飚高到40+MB/s。此时全部的数据都已经是走硬盘了(对硬盘的顺序读取OS层会进行Prefill PageCache的优化)。依然没有任何性能问题。<br><strong>Tips</strong>：</p>
 <blockquote>
 <ol>
 <li>Kafka官方并不建议通过Broker端的log.flush.interval.messages和log.flush.interval.ms来强制写盘，认为数据的可靠性应该通过Replica来保证，而强制Flush数据到磁盘会对整体性能产生影响</li>
@@ -399,7 +399,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://git-duzhengjie.github.io/2018/06/11/Kafka高性能吞吐揭秘/" data-id="cji9xvr7t0002oku2admqqmyx" class="article-share-link">Share</a>
+      <a data-url="https://git-duzhengjie.github.io/2018/06/11/Kafka高性能吞吐揭秘/" data-id="cji9yzel80000sou29tvfbbd1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -444,7 +444,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://git-duzhengjie.github.io/2018/06/11/hello-world/" data-id="cji9xt6vw0000yku2jsya48ks" class="article-share-link">Share</a>
+      <a data-url="https://git-duzhengjie.github.io/2018/06/11/hello-world/" data-id="cji9yzele0002sou2b76v23lx" class="article-share-link">Share</a>
       
       
     </footer>
