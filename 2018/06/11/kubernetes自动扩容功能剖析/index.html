@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概览"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#概念解析"><span class="toc-text">概念解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-CPU利用率"><span class="toc-text">  CPU利用率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-资源请求"><span class="toc-text">  资源请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nbsp-nbsp-资源限制"><span class="toc-text">  资源限制</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-概览"><span class="toc-text">1 概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-概念解析"><span class="toc-text">2 概念解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-CPU利用率"><span class="toc-text">2.1 CPU利用率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-资源请求"><span class="toc-text">2.2 资源请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-资源限制"><span class="toc-text">2.3 资源限制</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -140,18 +140,10 @@
 </span>
     </div>
     <div class="post-content ">
-        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><blockquote>
-<p>kubernetes自动扩容可以根据设定的cpu利用率，来自动增加pod副本，保证每个pod的利用率均不超过设定的cpu利用率。默认的，kubernetes每隔30秒获取一次pod的cpu利用率，也就是说，当负载增加达到或者超过设定的cpu利用率，kubernetes不一定会马上增加副本，它会在它下次更新pod利用率时进行。当负载下降，同样的kubernetes又会减少增加的副本数量，但是，它也不会立即下降。一般地，这需要10-12分钟，因为kubernetes需要保证，负载下降不是这一瞬时的下降。进行扩容的部署，需要指定pod的资源请求，如果没有设定是无法进行扩容的。扩容时，获取到的cpu利用率是指所有pod的平均cpu利用率。</p>
-</blockquote>
-<h1 id="概念解析"><a href="#概念解析" class="headerlink" title="概念解析"></a>概念解析</h1><h2 id="nbsp-nbsp-CPU利用率"><a href="#nbsp-nbsp-CPU利用率" class="headerlink" title="&nbsp;&nbsp;CPU利用率"></a>&nbsp;&nbsp;CPU利用率</h2><blockquote>
-<p>CPU资源以cpus为单位。允许小数值。你可以用后缀m来表示mili。例如100m cpu等同于100 milicpu，意思是0.1cpu</p>
-</blockquote>
-<h2 id="nbsp-nbsp-资源请求"><a href="#nbsp-nbsp-资源请求" class="headerlink" title="&nbsp;&nbsp;资源请求"></a>&nbsp;&nbsp;资源请求</h2><blockquote>
-<p>指定pod需要的资源使用，kubernetes会根据pod需求的资源量，调度到具有足够的资源请求量的节点删</p>
-</blockquote>
-<h2 id="nbsp-nbsp-资源限制"><a href="#nbsp-nbsp-资源限制" class="headerlink" title="&nbsp;&nbsp;资源限制"></a>&nbsp;&nbsp;资源限制</h2><blockquote>
-<p>指定pod最大资源请求量，如果容器超出内存限制，它将结束；如果容器超出cpu限制，它将成为cpu节流的候选者</p>
-</blockquote>
+        <h1 id="1-概览"><a href="#1-概览" class="headerlink" title="1 概览"></a>1 概览</h1><p>kubernetes自动扩容可以根据设定的cpu利用率，来自动增加pod副本，保证每个pod的利用率均不超过设定的cpu利用率。默认的，kubernetes每隔30秒获取一次pod的cpu利用率，也就是说，当负载增加达到或者超过设定的cpu利用率，kubernetes不一定会马上增加副本，它会在它下次更新pod利用率时进行。当负载下降，同样的kubernetes又会减少增加的副本数量，但是，它也不会立即下降。一般地，这需要10-12分钟，因为kubernetes需要保证，负载下降不是这一瞬时的下降。进行扩容的部署，需要指定pod的资源请求，如果没有设定是无法进行扩容的。扩容时，获取到的cpu利用率是指所有pod的平均cpu利用率。</p>
+<h1 id="2-概念解析"><a href="#2-概念解析" class="headerlink" title="2 概念解析"></a>2 概念解析</h1><h2 id="2-1-CPU利用率"><a href="#2-1-CPU利用率" class="headerlink" title="2.1 CPU利用率"></a>2.1 CPU利用率</h2><p>CPU资源以cpus为单位。允许小数值。你可以用后缀m来表示mili。例如100m cpu等同于100 milicpu，意思是0.1cpu</p>
+<h2 id="2-2-资源请求"><a href="#2-2-资源请求" class="headerlink" title="2.2 资源请求"></a>2.2 资源请求</h2><p>指定pod需要的资源使用，kubernetes会根据pod需求的资源量，调度到具有足够的资源请求量的节点删</p>
+<h2 id="2-3-资源限制"><a href="#2-3-资源限制" class="headerlink" title="2.3 资源限制"></a>2.3 资源限制</h2><p>指定pod最大资源请求量，如果容器超出内存限制，它将结束；如果容器超出cpu限制，它将成为cpu节流的候选者</p>
 
         
         <div id="comment-container">
