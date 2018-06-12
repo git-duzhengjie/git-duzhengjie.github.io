@@ -172,11 +172,11 @@
 <li>Protobuf API</li>
 </ul>
 <h1 id="4-查询语言"><a href="#4-查询语言" class="headerlink" title="4 查询语言"></a>4 查询语言</h1><p>InfluxDB 提供了类似sql的查询语言：</p>
-<pre><code>select * from events where state == &#39;NY&#39;;
+<pre><code>select * from events where state == &apos;NY&apos;;
 
 select * from log_lines where line =~ /error/i;
 
-select * from events where customer_id == 23 and type == &#39;click&#39;;
+select * from events where customer_id == 23 and type == &apos;click&apos;;
 
 select * from response_times where value &gt; 500;
 
@@ -185,7 +185,7 @@ select * from events where email !~ /.*gmail.*/;
 select * from nagios_checks where status != 0;
 
 select * from events 
-where (email =~ /.*gmail.* or email =~ /.*yahoo.*/) and state == &#39;ny&#39;;
+where (email =~ /.*gmail.* or email =~ /.*yahoo.*/) and state == &apos;ny&apos;;
 
 delete from response_times where time &gt; now() - 1h
 </code></pre><p>非常容易上手, 还支持Group By, Merging Series, Joining Series， 并内置常用统计函数，比如max, min, mean 等</p>
@@ -204,15 +204,15 @@ delete from response_times where time &gt; now() - 1h
 <p><img src="/images/influxdb-3.png" alt=""></p>
 <h2 id="6-2-Grafana"><a href="#6-2-Grafana" class="headerlink" title="6.2 Grafana"></a>6.2 Grafana</h2><p>Grafana是一个纯粹的html/js应用，访问InfluxDB时不会有跨域访问的限制。只要配置好数据源为InfluxDB之后就可以，剩下的工作就是配置图表。Grafana 功能非常强大。使用ElasticsSearch保存DashBoard的定义文件，也可以Export出JSON文件(Save -&gt;Advanced-&gt;Export Schema)，然后上传回它的/app/dashboards目录。 </p>
 <p> 配置数据源:</p>
-<pre><code> datasources: {      
-      influx: {
-        default: true,
-        type: &#39;influxdb&#39;,
-        url: &#39;http://&lt;your_influx_db_server&gt;:8086/db/&lt;db_name&gt;&#39;,
-        username: &#39;test&#39;,
-        password: &#39;test&#39;,
-      }
-    },
+<pre><code>datasources: {      
+     influx: {
+       default: true,
+       type: &apos;influxdb&apos;,
+       url: &apos;http://&lt;your_influx_db_server&gt;:8086/db/&lt;db_name&gt;&apos;,
+       username: &apos;test&apos;,
+       password: &apos;test&apos;,
+     }
+   },
 </code></pre><p>最后可以看到如下图所示界面：</p>
 <p><img src="/images/influxdb-4.png" alt=""></p>
 <h1 id="7-参考"><a href="#7-参考" class="headerlink" title="7 参考"></a>7 参考</h1><p><a href="http://www.ttlsa.com/monitor-safe/monitor/distributed-time-series-database-influxdb/" target="_blank" rel="noopener">http://www.ttlsa.com/monitor-safe/monitor/distributed-time-series-database-influxdb/</a></p>
