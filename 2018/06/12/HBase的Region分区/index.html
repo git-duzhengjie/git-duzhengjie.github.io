@@ -11,7 +11,7 @@
 
     <title>
         
-        MongoDB与HBase比较 - 杜政颉的博客
+        HBase的Region分区 - 杜政颉的博客
         
     </title>
 
@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、概览"><span class="toc-text">一、概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、关键概念"><span class="toc-text">二、关键概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#特性"><span class="toc-text">特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#开发者关注特性"><span class="toc-text">开发者关注特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理者关注特性"><span class="toc-text">管理者关注特性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Region概念"><span class="toc-text">Region概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Region-拆分策略"><span class="toc-text">Region 拆分策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
 </div>
     
 </div>
@@ -119,18 +119,18 @@
 
 <div class="post-container">
     <div class="post-title">
-        MongoDB与HBase比较
+        HBase的Region分区
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2018-06-12 13:29:07</span></span>
+        <span class="attr">发布于：<span>2018-06-12 14:53:40</span></span>
         
         <span class="attr">标签：/
         
         <a class="tag" href="/tags/#HBase" title="HBase">HBase</a>
         <span>/</span>
         
-        <a class="tag" href="/tags/#MongoDB" title="MongoDB">MongoDB</a>
+        <a class="tag" href="/tags/#Region" title="Region">Region</a>
         <span>/</span>
         
         
@@ -140,153 +140,25 @@
 </span>
     </div>
     <div class="post-content ">
-        <h1 id="一、概览"><a href="#一、概览" class="headerlink" title="一、概览"></a>一、概览</h1><p>MongoDB与HBase都是技术领先的非关系性数据库。MongoDB使用C++编写，HBase使用Java编写，HBase会受Java GC暂停的影响。MongoDB将数据存储为BSON（JSON的二进制形式表示）的文档。HBase专为 具有随机读取和写入访问模式Key-Value工作负载设计。</p>
-<h1 id="二、关键概念"><a href="#二、关键概念" class="headerlink" title="二、关键概念"></a>二、关键概念</h1><p>许多关系数据库概念与MongoDB和HBase有相似之处。该表概述了每个系统中的一些常见概念。  </p>
-<table>
-<thead>
-<tr>
-<th>RDBMS</th>
-<th>MongoDB</th>
-<th>Hbase</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>表</td>
-<td>collection</td>
-<td>表</td>
-</tr>
-<tr>
-<td>行</td>
-<td>Document</td>
-<td>列族</td>
-</tr>
-<tr>
-<td>没有类似的</td>
-<td>分片</td>
-<td>分区</td>
-</tr>
-<tr>
-<td>GROUP BY</td>
-<td>Aggregation Pipeline</td>
-<td>MapReduce</td>
-</tr>
-<tr>
-<td>多记录的ACID事务</td>
-<td>多记录的ACID事务</td>
-<td>没有</td>
-</tr>
-</tbody>
-</table>
-<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><h2 id="开发者关注特性"><a href="#开发者关注特性" class="headerlink" title="开发者关注特性"></a>开发者关注特性</h2><table>
-<thead>
-<tr>
-<th>MongoDB</th>
-<th>HBase</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>数据模型</strong></td>
-<td>Document</td>
-<td>宽列</td>
-</tr>
-<tr>
-<td><strong>支持的数据类型</strong></td>
-<td>多种</td>
-<td>数据转化为二进制</td>
-</tr>
-<tr>
-<td><strong>查询模型</strong></td>
-<td>多功能的查询</td>
-<td>Key-Value</td>
-</tr>
-<tr>
-<td><strong>二级索引</strong></td>
-<td>支持</td>
-<td>需要开发人员自己解决</td>
-</tr>
-<tr>
-<td><strong>聚合</strong></td>
-<td>支持</td>
-<td>需要将数据移动到特定的数据分析框架中</td>
-</tr>
-<tr>
-<td><strong>文本搜索</strong></td>
-<td>支持</td>
-<td>需要将数据转移到的特定的数据分析框架中</td>
-</tr>
-<tr>
-<td><strong>数据保证</strong></td>
-<td>支持</td>
-<td>没有</td>
-</tr>
-<tr>
-<td><strong>构建响应、事件驱动应用</strong></td>
-<td>支持</td>
-<td>没有</td>
-</tr>
-<tr>
-<td><strong>驱动支持</strong></td>
-<td>11种支持的驱动和30+社区支持</td>
-<td>支持Java和Thrift</td>
-</tr>
-<tr>
-<td><strong>事务保证</strong></td>
-<td>支持简单的事务</td>
-<td>单一行原子操作</td>
-</tr>
-</tbody>
-</table>
-<h2 id="管理者关注特性"><a href="#管理者关注特性" class="headerlink" title="管理者关注特性"></a>管理者关注特性</h2><table>
-<thead>
-<tr>
-<th></th>
-<th>MongoDB</th>
-<th>HBase</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>创建产品级集群需要的最少节点</strong></td>
-<td>3个：主节点和次节点</td>
-<td>10个：主和次级HMaster,RegionServers、hdfs和zookeeper</td>
-</tr>
-<tr>
-<td><strong>推荐每个节点存储的最大数据量</strong></td>
-<td>没有限制</td>
-<td>4TB</td>
-</tr>
-<tr>
-<td><strong>主节点失效恢复时间</strong></td>
-<td>2秒，数据可在次级节点读取</td>
-<td>60秒，数据可在次级节点读取</td>
-</tr>
-<tr>
-<td><strong>性能维护</strong></td>
-<td>C++编写不会出现Java GC暂停</td>
-<td>Java 编写，GC会出现暂停的问题</td>
-</tr>
-<tr>
-<td><strong>数据分区</strong></td>
-<td>支持hash、range、zone</td>
-<td>仅支持hash</td>
-</tr>
-<tr>
-<td><strong>备份和恢复</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>Spark和Hadoop适应</strong></td>
-<td>支持</td>
-<td>支持</td>
-</tr>
-</tbody>
-</table>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://www.mongodb.com/compare/mongodb-hbase" target="_blank" rel="noopener">https://www.mongodb.com/compare/mongodb-hbase</a></li>
-</ol>
+        <h1 id="Region概念"><a href="#Region概念" class="headerlink" title="Region概念"></a>Region概念</h1><p>Region是表获取和分布的基本元素，由每个列族的一个Store组成。对象层级如下所示：<br>Table -&gt; Region -&gt; Store -&gt; MemStore | StoreFile -&gt; Block</p>
+<ul>
+<li>Store：Store per ColumnFamily for each Region for the table</li>
+<li>MemStore：MemStore for each Store for each Region for the table</li>
+<li>StoreFile：StoreFiles for each Store for each Region for the table</li>
+<li>Block：Blocks within a StoreFile within a Store for each Region for the table</li>
+</ul>
+<p>Region的大小是一个棘手的问题，需要考量如下几个因素：  </p>
+<ul>
+<li>Region是HBase中分布式存储和负载均衡的最小单元。不同Region分布到不同RegionServer上，但并不是存储的最小单元</li>
+<li>Region由一个或者多个Store组成，每个store保存一个columns family，每个Strore又由一个memStore和0至多个StoreFile 组成。memStore存储在内存中， StoreFile存储在HDFS上</li>
+<li>HBase通过将region切分在许多机器上实现分布式。也就是说，你如果有16GB的数据，只分了2个region， 你却有20台机器，有18台就浪费了</li>
+<li>region数目太多就会造成性能下降，现在比以前好多了。但是对于同样大小的数据，700个region比3000个要好</li>
+<li>region数目太少就会妨碍可扩展性，降低并行能力。有的时候导致压力不够分散。这就是为什么，你向一个10节点的HBase集群导入200MB的数据，大部分的节点是idle的</li>
+<li>RegionServer中1个region和10个region索引需要的内存量没有太多的差别</li>
+</ul>
+<p>当region中的StoreFile大小超过了上面配置的值的时候，该region就会被拆分，具体的拆分策略见下文。</p>
+<h1 id="Region-拆分策略"><a href="#Region-拆分策略" class="headerlink" title="Region 拆分策略"></a>Region 拆分策略</h1><p>Region的分割操作是不可见的，因为Master不会参与其中。RegionServer拆分region的步骤是，先将该region下线，然后拆分，将其子region加入到META元信息中，再将他们加入到原本的RegionServer中，最后汇报Master。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/duanxz/p/3154487.html" target="_blank" rel="noopener">https://www.cnblogs.com/duanxz/p/3154487.html</a></p>
 
         
         <div id="comment-container">
@@ -348,7 +220,7 @@
 <script src="/js/gitment.js"></script>
 <script>
     var gitment = new Gitment({
-        id: 'MongoDB与HBase比较',
+        id: 'HBase的Region分区',
         owner: 'git-duzhengjie',
         repo: 'git-duzhengjie.github.io',
         oauth: {
