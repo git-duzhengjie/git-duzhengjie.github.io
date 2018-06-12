@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Region概念"><span class="toc-text">Region概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Region-拆分策略"><span class="toc-text">Region 拆分策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Region概念"><span class="toc-text">1 Region概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Region-拆分策略"><span class="toc-text">2 Region 拆分策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-参考"><span class="toc-text">3 参考</span></a></li></ol>
 </div>
     
 </div>
@@ -140,25 +140,25 @@
 </span>
     </div>
     <div class="post-content ">
-        <h1 id="Region概念"><a href="#Region概念" class="headerlink" title="Region概念"></a>Region概念</h1><p>Region是表获取和分布的基本元素，由每个列族的一个Store组成。对象层级如下所示：<br>Table -&gt; Region -&gt; Store -&gt; MemStore | StoreFile -&gt; Block</p>
-<ul>
+        <h1 id="1-Region概念"><a href="#1-Region概念" class="headerlink" title="1 Region概念"></a>1 Region概念</h1><p>Region是表获取和分布的基本元素，由每个列族的一个Store组成。对象层级如下所示：<br>Table -&gt; Region -&gt; Store -&gt; MemStore | StoreFile -&gt; Block</p>
+<ol>
 <li>Store：Store per ColumnFamily for each Region for the table</li>
 <li>MemStore：MemStore for each Store for each Region for the table</li>
 <li>StoreFile：StoreFiles for each Store for each Region for the table</li>
 <li>Block：Blocks within a StoreFile within a Store for each Region for the table</li>
-</ul>
+</ol>
 <p>Region的大小是一个棘手的问题，需要考量如下几个因素：  </p>
-<ul>
+<ol>
 <li>Region是HBase中分布式存储和负载均衡的最小单元。不同Region分布到不同RegionServer上，但并不是存储的最小单元</li>
 <li>Region由一个或者多个Store组成，每个store保存一个columns family，每个Strore又由一个memStore和0至多个StoreFile 组成。memStore存储在内存中， StoreFile存储在HDFS上</li>
 <li>HBase通过将region切分在许多机器上实现分布式。也就是说，你如果有16GB的数据，只分了2个region， 你却有20台机器，有18台就浪费了</li>
 <li>region数目太多就会造成性能下降，现在比以前好多了。但是对于同样大小的数据，700个region比3000个要好</li>
 <li>region数目太少就会妨碍可扩展性，降低并行能力。有的时候导致压力不够分散。这就是为什么，你向一个10节点的HBase集群导入200MB的数据，大部分的节点是idle的</li>
 <li>RegionServer中1个region和10个region索引需要的内存量没有太多的差别</li>
-</ul>
+</ol>
 <p>当region中的StoreFile大小超过了上面配置的值的时候，该region就会被拆分，具体的拆分策略见下文。</p>
-<h1 id="Region-拆分策略"><a href="#Region-拆分策略" class="headerlink" title="Region 拆分策略"></a>Region 拆分策略</h1><p>Region的分割操作是不可见的，因为Master不会参与其中。RegionServer拆分region的步骤是，先将该region下线，然后拆分，将其子region加入到META元信息中，再将他们加入到原本的RegionServer中，最后汇报Master。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/duanxz/p/3154487.html" target="_blank" rel="noopener">https://www.cnblogs.com/duanxz/p/3154487.html</a></p>
+<h1 id="2-Region-拆分策略"><a href="#2-Region-拆分策略" class="headerlink" title="2 Region 拆分策略"></a>2 Region 拆分策略</h1><p>Region的分割操作是不可见的，因为Master不会参与其中。RegionServer拆分region的步骤是，先将该region下线，然后拆分，将其子region加入到META元信息中，再将他们加入到原本的RegionServer中，最后汇报Master。</p>
+<h1 id="3-参考"><a href="#3-参考" class="headerlink" title="3 参考"></a>3 参考</h1><p><a href="https://www.cnblogs.com/duanxz/p/3154487.html" target="_blank" rel="noopener">https://www.cnblogs.com/duanxz/p/3154487.html</a></p>
 
         
         <div id="comment-container">
