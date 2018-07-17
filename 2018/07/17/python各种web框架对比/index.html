@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="杜政颉的博客">
+    <meta name="keyword"  content="爱车保">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        python各种web框架对比 - 杜政颉的博客
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 天行健，君子以自强不息；地势坤，君子以厚德载物 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/images/avartar.jpg" />
+        </div>
+        <div class="name">
+            <i>杜政颉</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-引言"><span class="toc-text">0 引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Django"><span class="toc-text">1 Django</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Flask"><span class="toc-text">2 Flask</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Tornado"><span class="toc-text">3 Tornado</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-web-py"><span class="toc-text">4 web.py</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Aiohttp"><span class="toc-text">5 Aiohttp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Sanic"><span class="toc-text">6 Sanic</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Vibora"><span class="toc-text">7 Vibora</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Bottle"><span class="toc-text">8 Bottle</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-Falcon"><span class="toc-text">9 Falcon</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-weppy"><span class="toc-text">10 weppy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-并发请求对比"><span class="toc-text">11 并发请求对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 天行健，君子以自强不息；地势坤，君子以厚德载物 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        python各种web框架对比
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-07-17 17:20:19</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="0-引言"><a href="#0-引言" class="headerlink" title="0 引言"></a>0 引言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python在web开发方面有着广泛的应用。鉴于各种各样的框架，对于开发者来说如何选择将成为一个问题。为此，我特此对比较常见的几种框架从性能、使用感受以及应用情况进行一个粗略的分析。</p>
+<h1 id="1-Django"><a href="#1-Django" class="headerlink" title="1 Django"></a>1 Django</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Django是一个开放源代码的Web应用框架，由Python写成。采用了MTV的框架模式，即模型M，模板T和视图V。它最初是被开发来用于管理劳伦斯出版集团旗下的一些以新闻内容为主的网站的，即是CMS（内容管理系统）软件。Django与其他框架比较，它有个比较独特的特性，支持orm，将数据库的操作封装成为python，对于需要适用多种数据库的应用来说是个比较好的特性。不过这种特性，已经有其他库完成了，sqlalchemy.</p>
+<h1 id="2-Flask"><a href="#2-Flask" class="headerlink" title="2 Flask"></a>2 Flask</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flask是一个使用 Python 编写的轻量级 Web 应用框架。其 WSGI 工具箱采用 Werkzeug ，模板引擎则使用 Jinja2 。Flask使用 BSD 授权。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flask也被称为 “microframework” ，因为它使用简单的核心，用 extension 增加其他功能。Flask没有默认使用的数据库、窗体验证工具。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flask 很轻，花很少的成本就能够开发一个简单的网站。非常适合初学者学习。Flask 框架学会以后，可以考虑学习插件的使用。例如使用 WTForm + Flask-WTForm 来验证表单数据，用 SQLAlchemy + Flask-SQLAlchemy 来对你的数据库进行控制。</p>
+<h1 id="3-Tornado"><a href="#3-Tornado" class="headerlink" title="3 Tornado"></a>3 Tornado</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tornado是一种 Web 服务器软件的开源版本。Tornado 和现在的主流 Web 服务器框架（包括大多数 Python 的框架）有着明显的区别：它是非阻塞式服务器，而且速度相当快。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得利于其 非阻塞的方式和对epoll的运用，Tornado 每秒可以处理数以千计的连接，因此 Tornado 是实时 Web 服务的一个 理想框架。不过现在与众多的框架比较，Tornado已经被抛在了后面，Django已经超过了它，更不说其他框架了，只能说Tornado使用纯python开发的性能还是不能与其他框架借助于cython开发的性能。</p>
+<h1 id="4-web-py"><a href="#4-web-py" class="headerlink" title="4 web.py"></a>4 web.py</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;web.py 是一个Python 的web 框架，它简单而且功能强大。web.py 是公开的，无论用于什么用途都是没有限制的。而且相当的小巧，应当归属于轻量级的web 框架。但这并不影响web.py 的强大，而且使用起来很简单、很直接。在实际应用上，web.py 更多的是学术上的价值，因为你可以看到更多web 应用的底层，这在当今“抽象得很好”的web 框架上是学不到的 ：）</p>
+<h1 id="5-Aiohttp"><a href="#5-Aiohttp" class="headerlink" title="5 Aiohttp"></a>5 Aiohttp</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高性能异步web框架，既有客户端的也有服务端的，还支持web-socket</p>
+<h1 id="6-Sanic"><a href="#6-Sanic" class="headerlink" title="6 Sanic"></a>6 Sanic</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与flask类似，并支持异步</p>
+<h1 id="7-Vibora"><a href="#7-Vibora" class="headerlink" title="7 Vibora"></a>7 Vibora</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;旨在成为最快的python web框架。vibora的高性能依赖于 cython实现的uvloop异步框架及cython实现的http_parser, 再加上一些cython构建的web组件，比如 模板，user-route等。</p>
+<h1 id="8-Bottle"><a href="#8-Bottle" class="headerlink" title="8 Bottle"></a>8 Bottle</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bottle是一个简单高效的遵循WSGI的微型python Web框架。说微型，是因为它只有一个文件，除Python标准库外，它不依赖于任何第三方模块。</p>
+<h1 id="9-Falcon"><a href="#9-Falcon" class="headerlink" title="9 Falcon"></a>9 Falcon</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Falcon是一个构建云API的高性能Python框架，它鼓励使用REST架构风格，尽可能以最少的力气做最多的事情。</p>
+<h1 id="10-weppy"><a href="#10-weppy" class="headerlink" title="10 weppy"></a>10 weppy</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性能优于flask的一个全栈web框架</p>
+<h1 id="11-并发请求对比"><a href="#11-并发请求对比" class="headerlink" title="11 并发请求对比"></a>11 并发请求对比</h1><table>
+<thead>
+<tr>
+<th>框架</th>
+<th>请求量/秒</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tornado</td>
+<td>14197</td>
+<td>5.0.2</td>
+</tr>
+<tr>
+<td>Django</td>
+<td>22823</td>
+<td>2.0.6</td>
+</tr>
+<tr>
+<td>Flask</td>
+<td>37487</td>
+<td>1.0.2</td>
+</tr>
+<tr>
+<td>Aiohttp</td>
+<td>61252</td>
+<td>3.3.2</td>
+</tr>
+<tr>
+<td>Sanic</td>
+<td>119764</td>
+<td>0.7.0</td>
+</tr>
+<tr>
+<td>Vibora</td>
+<td>368456</td>
+<td>0.0.6</td>
+</tr>
+</tbody>
+</table>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://github.com/vibora-io/vibora" target="_blank" rel="noopener">https://github.com/vibora-io/vibora</a></li>
+<li><a href="https://pypi.org/project/aiohttp/" target="_blank" rel="noopener">https://pypi.org/project/aiohttp/</a></li>
+<li><a href="https://www.colabug.com/3416265.html" target="_blank" rel="noopener">https://www.colabug.com/3416265.html</a></li>
+</ol>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/git-duzhengjie">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: 'python各种web框架对比',
+        owner: 'git-duzhengjie',
+        repo: 'git-duzhengjie.github.io',
+        oauth: {
+            client_id: '0088ec0e0601ed2c1cd6',
+            client_secret: '7e85fbfaf92187d769ca1cde7270dfe585bfc867',
+        },
+    })
+    gitment.render('comment-container')
+</script>
+
+</html>
