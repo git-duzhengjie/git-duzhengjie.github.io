@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="杜政颉的博客">
+    <meta name="keyword"  content="爱车保">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        微服务架构 - 杜政颉的博客
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 天行健，君子以自强不息；地势坤，君子以厚德载物 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/images/avartar.jpg" />
+        </div>
+        <div class="name">
+            <i>杜政颉</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-引言"><span class="toc-text">0 引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-SOA-1"><span class="toc-text">1 SOA[1]</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-概念"><span class="toc-text">1.1 概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-面向服务架构的元素"><span class="toc-text">1.2 面向服务架构的元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-面向服务架构特征"><span class="toc-text">1.3 面向服务架构特征</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-微服务架构-2-7"><span class="toc-text">2 微服务架构[2][7]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-SOA与微服务对比-2"><span class="toc-text">3 SOA与微服务对比[2]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-微服务设计要点-6"><span class="toc-text">4 微服务设计要点[6]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-参考"><span class="toc-text">4 参考</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 天行健，君子以自强不息；地势坤，君子以厚德载物 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        微服务架构
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-07-27 11:41:08</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#软件架构" title="软件架构">软件架构</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#微服务" title="微服务">微服务</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="0-引言"><a href="#0-引言" class="headerlink" title="0 引言"></a>0 引言</h1><p>微服务架构目前被广泛应用于各种系统的后台架构。微服务架构是什么？微服务架构有什么样的特点？微服务架构有怎样的前世今生？种种疑点等待我们去揭晓。</p>
+<h1 id="1-SOA-1"><a href="#1-SOA-1" class="headerlink" title="1 SOA[1]"></a>1 SOA<sup>[1]</sup></h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><p>SOA的英文全称为Service-Oriented Architecture，意即面向服务的架构，顾名思义，SOA就是以“服务”为基本元素来组建企业IT架构。是Gartner（全球最具权威的IT研究与顾问咨询公司）于2O世纪9O年代中期提出的面向服务架构的概念。2002年的12月，Gartner提出“面向服务的架构(SOA)”是“现代应用开发领域最重要的课题”之后。国内外计算机专家、学者掀起了对SOA的积极研究与探索。</p>
+<p>在技术层面上，SOA是一种“抽象的、松散耦合的粗粒度软件架构”；在业务层面上，SOA的核心概念是“重用”和“互操作”<sup>[4]</sup>，它将企业的IT资源整合成可操作的、基于标准的服务，使其能被重新组合和应用。面向服务架构，从语义上说，它与面向过程、面向对象、面向组件一样，是一种软件组建及开发的方式。与以往的软件开发、架构模式一样，SOA只是一种体系、一种思想，而不是某种具体的软件产品。SOA要解决的主要问题是：快速构建与应用集成。SOA能够在实际应用中获得成功基于两个重要的因素：灵活性和业务相关性。这使得它成为解决企业业务发展需求与企业IT支持能力之间矛盾的最佳方案。</p>
+<p>SOA成功的第一个重要因素是“灵活性”。SOA是第一个考虑了企业业务发展长期性的IT架构，从本质上说，SOA是一组松耦合的服务，每一个服务的建立和替换都是相对简单的。与传统的紧耦合架构相比，松耦合架构更能适应业务的变化：在SOA中，可以用一个服务替换另一个服务而无须关心其底层的实现技术，唯一要考虑的就是服务接口。SOA还可以充分利用企业现有的IT资源，包括企业已有的应用和数据库。新系统可以通过将已有应用和数据融入SOA，而不是替换它们，来使其成为企业整体解决方案的一部分。这种方式最终将使企业的IT架构能够更快速、更有效地适应业务需求的变化。</p>
+<p>SOA成功的第二个重要因素是“业务相关性”。SOA与其他IT架构的最大区别在于它与业务的关联性。它是以“服务”为基本单元来组织IT资源，其中的每一项服务都可以完成实际业务流程中的一项任务。例如，您可以把一项服务叫做“打印发票”，它可能包含计算收入、查找相应税率、计算应缴税款、打印发票等一系列操作。这样一来，服务就与业务产生了密切的联系，业务人员也可以参与服务的创建并且用它们定义新的业务流程。</p>
+<p>SOA服务和Web服务之间的区别在于设计。SOA的概念中并没有明确定义服务具体如何交互，而仅仅定义了服务如何相互理解以及如何交互。这种区别也就是指导策略与具体方法之间的区别。而且，Web服务在需要交互的服务之间如何传递消息有具体的指导原则，具体实现Web服务的模型是通过HTTP传递的SOAP消息的模型。尽管目前Web服务是实现SOA的最好方式。但是SOA并不局限于Web服务。其他使用WSDL直接实现服务接口并且通过XML消息进行通信的协议也可以包括在SOA之中。</p>
+<p>因此，从本质上说，Web服务只是实现SOA的具体方式之一。随着技术的发展，完全可能会出现替代Web服务的新技术新方法，利用它们能够更好的实现SOA。</p>
+<h2 id="1-2-面向服务架构的元素"><a href="#1-2-面向服务架构的元素" class="headerlink" title="1.2 面向服务架构的元素"></a>1.2 面向服务架构的元素</h2><ul>
+<li><p>服务使用者：服务使用者是一个应用程序、一个软件模块或需要一个服务的另一个服务。它发起对注册中心中的服务的查询，通过传输绑定服务，并且执行服务功能。服务使用者根据接口契约来执行服务。</p>
+</li>
+<li><p>服务提供者：服务提供者是一个可通过网络寻址的实体，它接受和执行来自使用者的请求。它将自己的服务和接口契约发布到服务注册中心，以便服务使用者可以发现和访问该服务。</p>
+</li>
+<li><p>服务注册中心：服务注册中心是服务发现的支持者。它包含一个可用服务的存储库，并允许感兴趣的服务使用者查找服务提供者接口。</p>
+</li>
+</ul>
+<p>面向服务的体系结构中的每个实体都扮演着服务提供者、使用者和注册中心这三种角色中的某一种(或多种)。面向服务的体系结构中的操作包括：</p>
+<p>发布：为了使服务可访问．需要发布服务描述以使服务使用者可以发现和调用它。</p>
+<p>发现：服务请求者定位服务．方法是查询服务注册中心来找到满足其标准的服务。</p>
+<p>绑定和调用：在检索完服务描述之后，服务使用者继续根据服务描述中的信息来调用服务。</p>
+<p>面向服务的体系结构中的构件包括：</p>
+<p>服务：可以通过已发布接口使用服务，并且允许服务使用者调用服务。</p>
+<p>服务描述：服务描述指定服务使用者与服务提供者交互的方式。它指定来自服务的请求和响应的格式。服务描述可以指定一组前提条件、后置条件和/或服务质量(Q0S)级别。</p>
+<h2 id="1-3-面向服务架构特征"><a href="#1-3-面向服务架构特征" class="headerlink" title="1.3 面向服务架构特征"></a>1.3 面向服务架构特征</h2><ol>
+<li>可重用</li>
+</ol>
+<p>一个服务创建后能用于多个应用和业务流程。</p>
+<ol start="2">
+<li>松耦合</li>
+</ol>
+<p>服务请求者到服务提供者的绑定与服务之间应该是松耦合的。因此，服务请求者不需要知道服务提供者实现的技术细节，例如程序语言、底层平台等等。</p>
+<ol start="3">
+<li>明确定义的接口</li>
+</ol>
+<p>服务交互必须是明确定义的。Web服务描述语言(Web Services Description Language，WSDL)是用于描述服务请求者所要求的绑定到服务提供者的细节。WSDL不包括服务实现的任何技术细节。服务请 求者不知道也不关心服务究竟是由哪种程序设计语言编写的。</p>
+<ol start="4">
+<li>无状态的服务设计</li>
+</ol>
+<p>服务应该是独立的、自包含的请求，在实现时它不需要获取从一个请求到另一个请求的信息或状态。服务不应该依赖于其他服务的上下文和状态。当产生依赖时，它们可以定义成通用业务流程、函数和 数据模型。</p>
+<ol start="5">
+<li>基于开放标准</li>
+</ol>
+<p>当前SOA的实现形式是Web服务，基于的是公开的W3C及其他公认标准．采用第一代Web服务定义的SOAP、WSDL和UDDI以及第二代Web服务定义的WS-*来实现SOA。</p>
+<h1 id="2-微服务架构-2-7"><a href="#2-微服务架构-2-7" class="headerlink" title="2 微服务架构[2][7]"></a>2 微服务架构<sup>[2][7]</sup></h1><p>微服务就是用一组小服务的方式来构建一个应用，服务独立运行在不同的进程中，服务之间通过轻量的通讯机制（如 RESTful 接口）来交互，并且服务可以通过自动化部署方式独立部署。</p>
+<p>微服务与SOA类似，他们的最大区别在于，微服务的拆分粒度更细（更详细的二者对比可以参考下一节）。这源于docker这项技术的诞生，有效解决了服务粒度细、服务数量多所导致的开发环境搭建、部署、运维成本高的问题。另外，敏捷、精益、持续交付、DevOps也对微服务的发展起到了推动作用。</p>
+<p>微服务架构的主要特征如下：</p>
+<ul>
+<li>原子服务：“高内聚，松耦合”</li>
+<li>高密度部署:重要的服务可以独立进程部署，非核心服务可以独立打包，合设到同一个进程中，服务被高密度部署。物理机部署，可在一台服务器上部署多个服务实例进程；如果是云端部署，则可以利用LXC实现容器级部署，以降低部署成本，提升资源利用率。</li>
+<li>敏捷交付：真正的DevOps。</li>
+<li>微自治：服务足够小，功能单一，可以独立打包、部署、升级、回滚和弹性伸缩，不依赖其他服务，实现局部自治。 </li>
+</ul>
+<h1 id="3-SOA与微服务对比-2"><a href="#3-SOA与微服务对比-2" class="headerlink" title="3 SOA与微服务对比[2]"></a>3 SOA与微服务对比<sup>[2]</sup></h1><p>两者的主要差异如下：</p>
+<ul>
+<li>服务拆分粒度：SOA首先要解决的是异构系统应用的服务化；微服务强调的是服务拆分尽可能小，最好是独立的原子服务。</li>
+<li>服务依赖：传统的SOA服务，由于需要重用已有的资产，存在大量的服务间依赖；微服务的设计理念是服务自治、功能单一独立，避免依赖其他服务产生耦合，耦合会带来更高的复杂度。</li>
+<li>服务规模：传统SOA服务粒度比较大，多数会采用将多个服务合并打成war包的方案，因此服务实例数比较有限；微服务强调尽可能拆分，同时很多服务会独立部署，这将导致服务规模急剧膨胀，对服务治理和运维带来新的挑战。</li>
+<li>架构差异：微服务化之后，服务数量的激增会引起架构质量属性的变化，例如企业集成总线ESB逐渐被P2P的虚拟总线替代；为了保证高性能、低时延，需要高性能的分布式服务框架保证微服务架构的实施。</li>
+<li>服务治理：传统基于SOA Governance的静态治理转型为服务运行态微治理、实时生效。</li>
+<li>敏捷交付：服务由小研发团队负责微服务设计、开发、测试、部署、线上治理、灰度发布和下线，运维整个生命周期支撑，实现真正的DevOps。</li>
+</ul>
+<p>总结：量变引起质变，这就是微服务架构和SOA服务化架构的最大差异。</p>
+<h1 id="4-微服务设计要点-6"><a href="#4-微服务设计要点-6" class="headerlink" title="4 微服务设计要点[6]"></a>4 微服务设计要点<sup>[6]</sup></h1><ol>
+<li>负载均衡+API网关</li>
+<li>无状态化，区分有状态的和无状态的应用</li>
+<li>数据库的横向扩展</li>
+<li>缓存</li>
+<li>服务拆分和服务发现</li>
+<li>服务编排和弹性伸缩</li>
+<li>统一配置中心</li>
+<li>统一日志中心</li>
+<li>熔断、限流、降级<blockquote>
+<p>服务要有熔断，限流，降级的能力，当一个服务调用另一个服务，出现超时的时候，应及时返回，而非阻塞在那个地方，从而影响其他用户的交易，可以返回默认的托底数据。 </p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>当一个服务发现被调用的服务，因为过于繁忙，线程池满，连接池满，或者总是出错，则应该及时熔断，防止因为下一个服务的错误或繁忙，导致本服务的不正常，从而逐渐往前传导，导致整个应用的雪崩。</p>
+</blockquote>
+<blockquote>
+<p>当发现整个系统的确负载过高的时候，可以选择降级某些功能或某些调用，保证最重要的交易流程的通过，以及最重要的资源全部用于保证最核心的流程。</p>
+</blockquote>
+<blockquote>
+<p>还有一种手段就是限流，当既设置了熔断策略，又设置了降级策略，通过全链路的压力测试，应该能够知道整个系统的支撑能力，因而就需要制定限流策略，保证系统在测试过的支撑能力范围内进行服务，超出支撑能力范围的，可拒绝服务。当你下单的时候，系统弹出对话框说 “系统忙，请重试”，并不代表系统挂了，而是说明系统是正常工作的，只不过限流策略起到了作用。</p>
+<ol start="10">
+<li>全方位监控</li>
+</ol>
+</blockquote>
+<h1 id="4-参考"><a href="#4-参考" class="headerlink" title="4 参考"></a>4 参考</h1><ol>
+<li><a href="http://wiki.mbalib.com/wiki/面向服务架构" target="_blank" rel="noopener">http://wiki.mbalib.com/wiki/面向服务架构</a></li>
+<li><a href="https://www.cnblogs.com/f-zhao/p/7401607.html" target="_blank" rel="noopener">https://www.cnblogs.com/f-zhao/p/7401607.html</a></li>
+<li><a href="https://baike.baidu.com/item/SOA/2140650" target="_blank" rel="noopener">https://baike.baidu.com/item/SOA/2140650</a></li>
+<li>Eric Newcomer，Greg Lomow．Understanding SOA with Web Services[M]．Addison Wesley Professiona1．  </li>
+<li>Thomas Erl．Service-Oriented Architectural Concepts，Technology，and Design[M]．Prentice Hall PTR</li>
+<li><a href="https://mp.weixin.qq.com/s/1at5jMyIBJQHnqHKUIpkTw" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/1at5jMyIBJQHnqHKUIpkTw</a></li>
+<li><a href="https://blog.csdn.net/u012869196/article/details/73608855" target="_blank" rel="noopener">https://blog.csdn.net/u012869196/article/details/73608855</a></li>
+</ol>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/git-duzhengjie">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: '微服务架构',
+        owner: 'git-duzhengjie',
+        repo: 'git-duzhengjie.github.io',
+        oauth: {
+            client_id: '0088ec0e0601ed2c1cd6',
+            client_secret: '7e85fbfaf92187d769ca1cde7270dfe585bfc867',
+        },
+    })
+    gitment.render('comment-container')
+</script>
+
+</html>
